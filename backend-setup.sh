@@ -23,9 +23,15 @@ printf "${COLOR}Slack installation complete ${NC}\n"
 
 printf "${COLOR}VSCode installation attempted${NC}\n"
 
-apt install code
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB3E94ADBE1229CF
+sudo add-apt-repository -y "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt -y install code
 
 printf "${COLOR}Slack installation completed ${NC}\n"
+
+printf "${COLOR}installing curl ... ${NC}\n"
+
+apt-get install curl
 
 printf "${COLOR}Attempting NVM${NC}\n"
 
@@ -42,5 +48,4 @@ printf "${COLOR}Node installation attemted${NC}\n"
 nvm install node
 
 printf "${COLOR}Node installation completed${NC}\n"
-
 
