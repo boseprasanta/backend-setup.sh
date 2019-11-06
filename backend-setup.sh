@@ -49,3 +49,42 @@ nvm install node
 
 printf "${COLOR}Node installation completed${NC}\n"
 
+printf "${COLOR}Attempting mongodb installation${NC}\n"
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
+sudo apt install mongodb-org
+sudo apt install mongodb-org=4.2.1 mongodb-org-server=4.2.1 mongodb-org-shell=4.2.1 mongodb-org-mongos=4.2.1 mongodb-org-tools=4.2.1
+sudo systemctl enable mongod
+sudo systemctl start mongod 
+sudo systemctl stop mongod
+sudo systemctl restart mongod 
+
+printf "${COLOR}mongo installation completed${NC}\n"
+
+mongod --version 
+
+printf "${COLOR}Mongodb installation complete${NC}\n"
+
+printf "${COLOR}Attempting insomnia installation${NC}\n"
+
+# Add to sources
+echo "deb https://dl.bintray.com/getinsomnia/Insomnia /" | sudo tee -a /etc/apt/sources.list.d/insomnia.list
+
+# Add public key used to verify code signature
+wget --quiet -O - https://insomnia.rest/keys/debian-public.key.asc | sudo apt-key add -
+
+# Refresh repository sources and install Insomnia
+sudo apt-get update
+sudo apt-get install insomnia
+
+printf "${COLOR}Insomnia Installation Completed${NC}\n"
+
+# printf "${COLOR}Attempting robomongo Installation${NC}\n"
+
+# robomongo has some unmet dependency | This need more work
+
+# wget https://download.robomongo.org/0.8.5/linux/robomongo-0.8.5-x86_64.deb
+# sudo dpkg -i robomongo-0.8.5-x86_64.deb
+
+# printf "${COLOR}Robomongo Installation completed${NC}\n"
