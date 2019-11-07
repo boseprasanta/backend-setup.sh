@@ -1,3 +1,5 @@
+#!
+
 COLOR='\033[1;33m'
 NC='\033[0m' # No Color
 
@@ -7,7 +9,7 @@ apt-get update
 
 printf "${COLOR}Installing firefox..${NC}\n"
 
-apt install firefox
+sudo apt install firefox
 
 printf "${COLOR}firefox installed / updated ${NC}\n"
 
@@ -17,7 +19,7 @@ wget https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.2-amd64.d
 
 printf "${COLOR}Installing Slack ${NC}\n"
 
-apt install ./slack-desktop-*.deb
+sudo apt install ./slack-desktop-*.deb
 
 printf "${COLOR}Slack installation complete ${NC}\n"
 
@@ -31,7 +33,7 @@ printf "${COLOR}Slack installation completed ${NC}\n"
 
 printf "${COLOR}installing curl ... ${NC}\n"
 
-apt-get install curl
+sudo apt-get install curl
 
 printf "${COLOR}Attempting NVM${NC}\n"
 
@@ -51,14 +53,13 @@ printf "${COLOR}Node installation completed${NC}\n"
 
 printf "${COLOR}Attempting mongodb installation${NC}\n"
 
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B
-echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb.list
-sudo apt install mongodb-org
-sudo apt install mongodb-org=4.2.1 mongodb-org-server=4.2.1 mongodb-org-shell=4.2.1 mongodb-org-mongos=4.2.1 mongodb-org-tools=4.2.1
-sudo systemctl enable mongod
-sudo systemctl start mongod 
-sudo systemctl stop mongod
-sudo systemctl restart mongod 
+sudo apt-get update
+
+sudo apt-get install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+sudo apt-get install -y mongodb-org
+sudo service mongod start
 
 printf "${COLOR}mongo installation completed${NC}\n"
 
